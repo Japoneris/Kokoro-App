@@ -1,0 +1,23 @@
+services:
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    ports:
+      - "8501:8501"
+    environment:
+      - SERVER_URL=http://server:8000
+    volumes:
+      - ./outputs:/app/outputs
+    depends_on:
+      - server
+    restart: unless-stopped

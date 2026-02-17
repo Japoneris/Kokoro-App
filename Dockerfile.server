@@ -1,0 +1,21 @@
+FROM python:3.13-slim
+
+# espeak-ng is required by kokoro for phoneme conversion
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        espeak-ng \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+RUN pip install --no-cache-dir \
+        "kokoro>=0.9.2" \
+        fastapi \
+        "uvicorn[standard]" \
+        numpy
+
+COPY run_server.py .
+COPY src/ src/
+
+EXPOSE 8000
+
+CMD ["python", "run_server.py", "--host", "0.0.0.0", "--port", "8000"]
