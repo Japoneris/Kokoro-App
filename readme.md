@@ -2,9 +2,11 @@
 
 Kokoro is a lightweight multilingual text-to-speech model ([Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M)).
 
-This project provide a GUI to interact with the model and an HTTP server to host the model.
+This project provides a GUI to interact with the model. 
+The model is runned thanks to an HTTP server that you can reuse for other apps.
 
 To run, `docker compose up` to build and start the GUI and app.
+(Building the server takes time due to the transformer library)
 
 You will access the Kokoro GUI at [localhost:8501/kokoro/](http://localhost:8501/kokoro/)
 
@@ -13,7 +15,7 @@ You will access the Kokoro GUI at [localhost:8501/kokoro/](http://localhost:8501
 
 <img
         src="static/screenshot.png" 
-        width=50%
+        width=100%
         title="GUI screenshot"
         alt="GUI screenshot"
     />
