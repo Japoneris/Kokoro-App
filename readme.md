@@ -5,10 +5,7 @@ Kokoro is a lightweight multilingual text-to-speech model ([Kokoro-82M](https://
 This project provides a GUI to interact with the model. 
 The model is runned thanks to an HTTP server that you can reuse for other apps.
 
-To run, `docker compose up` to build and start the GUI and app.
-(Building the server takes time due to the transformer library)
 
-You will access the Kokoro GUI at [localhost:8501/kokoro/](http://localhost:8501/kokoro/)
 
 
 
@@ -77,6 +74,13 @@ Optional server flags:
 ```bash
 python run_server.py --host 0.0.0.0 --port 8000 --reload
 ```
+
+---
+
+## Docker
+
+For some unknown reason, the build of the docker server takes forever (never returns).
+Therefore, the current docker-compose is unusable... Sorry for that.
 
 ---
 
