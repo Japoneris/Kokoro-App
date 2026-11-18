@@ -125,6 +125,23 @@ def default_filename(language: str, voice_id: str) -> str:
     return f"{idx:03d}-{lang_slug}-{voice_id}"
 
 
+def render_server_sidebar(st) -> str:
+    """Render the backend endpoint field in the sidebar and return its base URL."""
+    st.session_state.setdefault("server_url", SERVER_URL)
+    with st.sidebar:
+        st.divider()
+        st.header("Backend")
+        st.text_input(
+            "Server URL",
+            key="server_url",
+            help=(
+                "Base URL of the TTS server. Defaults to the SERVER_URL "
+                "environment variable, or http://localhost:8000 when unset."
+            ),
+        )
+    return st.session_state["server_url"].strip().rstrip("/")
+
+
 def render_voice_sidebar(st):
     """Render the shared voice-selection sidebar and return (voice_id, speed, language_override, language)."""
     with st.sidebar:

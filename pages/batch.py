@@ -3,11 +3,12 @@ import streamlit as st
 import requests
 
 from pages._config import (
-    SERVER_URL, OUTPUT_DIR,
+    render_server_sidebar, OUTPUT_DIR,
     render_voice_sidebar, default_filename,
 )
 
 voice_id, speed, language_override, language = render_voice_sidebar(st)
+server_url = render_server_sidebar(st)
 
 with st.sidebar:
     st.divider()
@@ -38,7 +39,7 @@ if st.button("Generate Speech", type="primary", use_container_width=True):
                 if language_override:
                     payload["language"] = language_override
                 response = requests.post(
-                    f"{SERVER_URL}/v1/audio/speech",
+                    f"{server_url}/v1/audio/speech",
                     json=payload,
                     timeout=120,
                 )
@@ -54,7 +55,7 @@ if st.button("Generate Speech", type="primary", use_container_width=True):
                     st.error(f"Server error {response.status_code}: {detail}")
             except requests.exceptions.ConnectionError:
                 st.error(
-                    f"Cannot connect to the server at `{SERVER_URL}`.  \n"
+                    f"Cannot connect to the server at `{server_url}`.  \n"
                     "Make sure it is running:  \n"
                     "```\npython run_server.py\n```"
                 )

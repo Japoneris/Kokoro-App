@@ -5,11 +5,12 @@ import pandas as pd
 import requests
 import streamlit as st
 
-from pages._config import SERVER_URL, render_voice_sidebar
+from pages._config import render_server_sidebar, render_voice_sidebar
 
 _WAV_HEADER_SIZE = 44  # bytes in a standard WAV header
 
 voice_id, speed, language_override, _ = render_voice_sidebar(st)
+server_url = render_server_sidebar(st)
 
 # ── Main area ──────────────────────────────────────────────────────────────────
 
@@ -42,7 +43,7 @@ if st.button("Generate (streaming)", type="primary", use_container_width=True):
 
         try:
             with requests.post(
-                f"{SERVER_URL}/v1/audio/speech/stream",
+                f"{server_url}/v1/audio/speech/stream",
                 json=payload,
                 stream=True,
                 timeout=300,
@@ -90,7 +91,7 @@ if st.button("Generate (streaming)", type="primary", use_container_width=True):
 
         except requests.exceptions.ConnectionError:
             st.error(
-                f"Cannot connect to the server at `{SERVER_URL}`.  \n"
+                f"Cannot connect to the server at `{server_url}`.  \n"
                 "Make sure it is running:  \n"
                 "```\npython run_server.py\n```"
             )

@@ -75,6 +75,11 @@ Optional server flags:
 python run_server.py --host 0.0.0.0 --port 8000 --reload
 ```
 
+The app's sidebar has a **Server URL** field under *Backend*. It defaults to
+`http://localhost:8000` (or the `SERVER_URL` environment variable, which
+`docker-compose.yml` sets to `http://server:8000`). Changing it applies to both
+the Batch and Streaming pages.
+
 ---
 
 ## Docker
